@@ -26,4 +26,4 @@ async def get_session() -> AsyncSession:
 
     # Provide a session for the request, and automatically close it after use.
     async with async_session() as session:
-        yield
+        yield session
