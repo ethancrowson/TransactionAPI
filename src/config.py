@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     POSTGRES_URL :str
     DATABASE_URL: str
+    TEST_POSTGRES_URL: str
 
     model_config=SettingsConfigDict(
         env_file="./.env",
