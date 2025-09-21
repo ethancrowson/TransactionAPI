@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, UploadFile, File
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.main import get_session
@@ -9,9 +9,14 @@ from src.transactions.service import TransactionService
 # Group all transaction related endpoints.
 transaction_router = APIRouter()
 
+# upload a transaction file (e.g. CSV)
 @transaction_router.post("/upload")
-async def upload_transactions():
-    pass
+async def upload_transactions(
+        file: UploadFile = File(...), # Uploaded file (required)
+        session: AsyncSession = Depends(get_session),
+):
+    status = await TransactionService(session).upload_transactions(file)
+    return status
 
 # Fetch a user's transaction summary (incl min, mean, and max transaction amount).
 @transaction_router.get("/summary/{user_id}")
