@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# Settings class for environment configuration.
 class Settings(BaseSettings):
     POSTGRES_URL :str
 
@@ -8,4 +9,5 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
+# Create a global settings instance.
 settings = Settings()

@@ -4,9 +4,11 @@ from sqlmodel import SQLModel, Field, Column
 import sqlalchemy.dialects.postgresql as pg
 from uuid import UUID, uuid4
 
+# SQLModel table definition for transactions.
 class Transaction(SQLModel, table=True):
     __tablename__ = 'transactions'
 
+    # Unique transaction ID (UUID primary key)
     transaction_id:UUID = Field(
         sa_column=Column(
             pg.UUID,
